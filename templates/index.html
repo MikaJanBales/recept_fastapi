@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <a href="addnew/" class="btn btn-primary">Add new</a>
+        <br><br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Ingredients</th>
+                    <th>Steps cooking</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rs in recepts %}
+                    <tr>
+                        <td>{{ rs.id }}</td>
+                        <td>{{ rs.title }}</td>
+                        <td>{{ rs.description }}</td>
+                        <td>{{ rs.ingredients }}</td>
+                        <td>{{ rs.steps_cooking }}</td>
+                        <td>
+                            <a href="edit/{{ rs.id }}" class="btn btn-warning">Edit</a> | <a href="delete/{{ rs.id }}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,12 +1,11 @@
 from sqlalchemy.orm import Session
 
 from db.models.recepts import Recept
-from db.schemas.recepts import ReceptSchema
 
 
 # Получение списка всех рецептов
 def get_recept(db: Session):
-    return db.query(Recept).all()
+    return db.query(Recept).order_by(Recept.id.desc()).all()
 
 
 # Получение информации о конкретном рецепте по ID
@@ -15,9 +14,10 @@ def get_recept_by_id(db: Session, recept_id: int):
 
 
 # Создание нового рецепта
-def create_recept(db: Session, recept: ReceptSchema):
-    _recept = Recept(title=recept.title, description=recept.description, ingredients=recept.ingredients,
-                     steps_cooking=recept.steps_cooking)
+def create_recept(db: Session, title: str, description: str,
+                  ingredients: str, steps_cooking: str):
+    _recept = Recept(title=title, description=description, ingredients=ingredients,
+                     steps_cooking=steps_cooking)
     db.add(_recept)
     db.commit()
     db.refresh(_recept)
@@ -26,9 +26,9 @@ def create_recept(db: Session, recept: ReceptSchema):
 
 # Удаление рецепта по ID
 def remove_recept(db: Session, recept_id: int):
-    _recept = get_recept_by_id(db=db, recept_id=recept_id)
-    db.delete(_recept)
+    _recept = db.query(Recept).filter_by(id=recept_id).delete()
     db.commit()
+    db.close()
 
 
 # Редактирование рецепта по ID
