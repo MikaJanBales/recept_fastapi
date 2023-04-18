@@ -4,7 +4,7 @@ from db.config import Base
 
 
 class Recept(Base):
-    __tablename__ = "recepts"
+    __tablename__ = "recept"
     id = Column(Integer, primary_key=True)
     title = Column(String(50), nullable=False)
     description = Column(Text, nullable=False)

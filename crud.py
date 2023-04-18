@@ -3,17 +3,17 @@ from sqlalchemy.orm import Session
 from db.models.recepts import Recept
 
 
-# Получение списка всех рецептов
+# Получение списка всех рецептов из бд
 def get_recept(db: Session):
     return db.query(Recept).order_by(Recept.id.desc()).all()
 
 
-# Получение информации о конкретном рецепте по ID
+# Получение информации о конкретном рецепте по ID из бд
 def get_recept_by_id(db: Session, recept_id: int):
     return db.query(Recept).filter(Recept.id == recept_id).first()
 
 
-# Создание нового рецепта
+# Создание нового рецепта в бд
 def create_recept(db: Session, title: str, description: str,
                   ingredients: str, steps_cooking: str):
     _recept = Recept(title=title, description=description, ingredients=ingredients,
@@ -24,14 +24,15 @@ def create_recept(db: Session, title: str, description: str,
     return _recept
 
 
-# Удаление рецепта по ID
+# Удаление рецепта по ID из бд
 def remove_recept(db: Session, recept_id: int):
-    _recept = db.query(Recept).filter_by(id=recept_id).delete()
+    _recept = get_recept_by_id(db, recept_id)
+    db.delete(_recept)
     db.commit()
     db.close()
 
 
-# Редактирование рецепта по ID
+# Редактирование рецепта по ID из бд
 def update_recept(db: Session, recept_id: int, title: str, description: str, ingredients: str, steps_cooking: str):
     _recept = get_recept_by_id(db=db, recept_id=recept_id)
     _recept.title = title

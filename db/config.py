@@ -24,3 +24,6 @@ connect_string = get_connect_string(os.environ)
 engine = create_engine(connect_string)
 SessionLocal = sessionmaker(bind=engine, autoflush=False)
 Base = declarative_base()
+
+
+
