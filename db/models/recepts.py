@@ -12,4 +12,4 @@ class Recept(Base):
     steps_cooking = Column(Text, nullable=False)
 
     def __repr__(self):
-        return f'<Recept "{self.name}">'
+        return f'<Recept "{self.title}">'
