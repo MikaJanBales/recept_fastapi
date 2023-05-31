@@ -15,9 +15,11 @@ def get_db():
         db.close()
 
 
+#
 @router.post("/add")
 async def add_recept(recept: ReceptSchema, db: Session = Depends(get_db)):
-    _recept = crud.create_recept(db, recept.title, recept.description, recept.ingredients,
+    _recept = crud.create_recept(db, recept.title, recept.description,
+                                 recept.ingredients,
                                  recept.steps_cooking)
     return _recept
 
@@ -35,8 +37,10 @@ async def get_recept(recept_id: int, db: Session = Depends(get_db)):
 
 
 @router.put("/edit/{recept_id}")
-async def edit_recept(recept_id: int, recept: ReceptSchema, db: Session = Depends(get_db)):
-    _recept = crud.update_recept(db, recept_id, recept.title, recept.description, recept.ingredients,
+async def edit_recept(recept_id: int, recept: ReceptSchema,
+                      db: Session = Depends(get_db)):
+    _recept = crud.update_recept(db, recept_id, recept.title,
+                                 recept.description, recept.ingredients,
                                  recept.steps_cooking)
     return _recept
 
