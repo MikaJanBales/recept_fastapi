@@ -2,7 +2,6 @@ from pydantic import BaseModel
 
 
 class ReceptSchema(BaseModel):
-    id: int
     title: str
     description: str
     ingredients: str

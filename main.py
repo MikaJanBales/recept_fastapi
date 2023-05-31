@@ -4,7 +4,8 @@ from db.config import Base, engine
 from views import router
 
 Base.metadata.create_all(engine)
-app = FastAPI(title="Recepts")
+
+app = FastAPI(title="Recepts", docs_url="/", redoc_url=None)
 
 app.include_router(router, prefix="/recept", tags=["recept"])
 
