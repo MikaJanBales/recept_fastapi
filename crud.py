@@ -1,6 +1,6 @@
 from db.models.recepts import Recept
-from db.models.users import NewUser
-from db.schemas.users import CreateUserSchema
+# from db.models.users import NewUser
+# from db.schemas.users import CreateUserSchema
 from db.config import db as session
 
 
