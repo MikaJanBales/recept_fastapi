@@ -5,9 +5,9 @@ services:
     image: postgres
 
     environment:
-      POSTGRES_USER: "recept"
-      POSTGRES_PASSWORD: "recept"
-      POSTGRES_DB: "recept"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "postgres"
     ports:
       - "5432:5432"
   web:

@@ -1,9 +1,6 @@
 import uvicorn
 from fastapi import FastAPI
-from db.config import Base, engine
 from views import router
-
-Base.metadata.create_all(engine)
 
 app = FastAPI(title="Recepts", docs_url="/", redoc_url=None)
 
